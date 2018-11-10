@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>    
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../static/css/foter.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+    <style>
+    .login-box{
+        width: 400px;
+        padding-top: 40px;
+        padding-left: 20px;
+        padding-right : 20px;
+        padding-bottom : 20px;
+        position: relative;
+        margin: auto;
+        top: 20px;
+        right: 0;
+        left: 0;
+        background-color: #ccc;
+        border-radius: 3px;
+    }
+    .close{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .content{
+        margin-top: 100px;
+        margin-left: 100px;
+        margin-right: 50px;
+        margin-bottom: 100px;
+    }
+    .card{
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    .modal-header {
+    background-color: darkgrey;
+}
+
+
+    /* .logo {
+    margin-left: 20px;
+    margin-top: 10px;
+} */
+
+    </style>
+    <script>
+    $(document).on("click", ".close", function(){
+        console.log("clicked")
+    })
+    var book_categories = [];
+    $.get("bookCategories", function(data){
+        data = JSON.parse(data);
+        book_categories = data.categories;
+        book_categories.forEach(element => {
+            $(".bookCategories").append("<option>"+element+"</option>")
+        });
+    })
+
+    var user_options = ["Your Account", "Books List", "Your lendings", "Queue items"]
+
+    user_options.forEach(element =>{
+        $(".userOptions").append("<a class='dropdown-item' href='#'>"+element+"</a>")
+    })
+    
+    </script>
+</head>
+<body>
+    <div class="header d-flex flex-align-center flex-row justify-content-center align-items-center fixed-top" style="height:60px; background-color:lightslategray;">
+        <div class="logo p-2">
+            <img src="../static/images/logo.png" width="60px">
+        </div>
+        <div class="search_div p-2">
+            <form action="/getBooks" method="GET">
+                <div class="d-flex">
+                    <div class="search_dropdown">
+                        <select class="selectpicker bookCategories">
+                        </select>
+                    </div>
+
+                    <div class="search_bar" id="x">
+                            <input type="text" class="form-control" placeholder="Search" />
+                    </div>
+                    <div class="search_submit">
+                        <button type="submit" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                        
+                    </div> 
+                </div>
+            </form>
+        </div>
+        <div class="user-info p-2">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    You<span class="glyphicon glyphicon-user" aria-hidden="true"></span>      
+                </button>
+                <div class="dropdown-menu userOptions" aria-labelledby="dropdownMenuButton">
+                            
+                        <a class='dropdown-item' href='#'>Your Account</a>
+                        <a class='dropdown-item' href='#'>Books List</a>
+                        <a class='dropdown-item' href='#'>Your lendings</a>
+                        <a class='dropdown-item' href='#'>Queue items</a>
+                        <a class='dropdown-item' href='#'>LogOut</a>
+
+                   
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary user-buttons" >LogIn</button> or <button class="btn btn-primary user-buttons" >SignUp</button>
+        </div>
+    </div>
+<!-- Modal -->
+<form action="/login" method="GET">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">LogIn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail0">Email address</label>
+                        <input type="email" class="form-control" name="email" id="exampleInputEmail0" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Password">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">LogIn</button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form action="/signup" method="GET">
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">SignUp</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="regemail" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mobile number</larbel>
+                            <input type="text" class="form-control" id="mobileInput" aria-describedby="emailHelp" placeholder="Enter mobile number">
+                        </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Create Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">SignUp</button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+    <div class="content">{% block content %}{% endblock %}</div>
+
+    <footer class="mainfooter" role="contentinfo">
+  
+
+ 
+      <div class="footer-middle">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Address</h4>
+              <address>
+                    <ul class="list-unstyled">
+                        <li>Hyderabad<br>
+                            Telangana<br>
+                            India<br>
+                        </li>
+                        <li>
+                            Phone: 8106438243
+                        </li>
+                    </ul>
+                </address>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Popular Services</h4>
+              <ul class="list-unstyled">
+                <li><a href="#"></a></li>
+                <li><a href="#">Payment Center</a></li>
+                <li><a href="#">Contact Directory</a></li>
+                <li><a href="#">Forms</a></li>
+                <li><a href="#">News and Updates</a></li>
+                <li><a href="#">FAQs</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Website Information</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">Website Tutorial</a></li>
+                <li><a href="#">Accessibility</a></li>
+                <li><a href="#">Disclaimer</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Webmaster</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Popular Departments</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">Parks and Recreation</a></li>
+                <li><a href="#">Public Works</a></li>
+                <li><a href="#">Police Department</a></li>
+                <li><a href="#">Fire</a></li>
+                <li><a href="#">Mayor and City Council</a></li>
+                <li>
+                  <a href="#"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <!--Footer Bottom-->
+              <p class="text-xs-center">&copy; Copyright 2018 - City of HYD.  All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

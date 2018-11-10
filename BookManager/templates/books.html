@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{% block title %}LogIn{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+<div class="content">
+{% block content %}
+<div class="row">
+    {% for i in range(24) %}
+   
+    <div class="card col-xs-4" style="width: 15rem; height: 30rem; margin-right: 10px">
+        <a href="#">
+            <img class="card-img-top" src="../static/images/books/Wings-Of-Fire-SDL997469457-1-b9984.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h3 class="card-title">Wings-Of-Fire</h3>
+                <p class="card-text">Some quick example content.</p>
+            </div>
+        </a>
+    </div>
+    {%endfor%}
+</div>   
+{% endblock %}
+</div>
