@@ -63,6 +63,9 @@
     $(document).on("click", ".close", function(){
         console.log("clicked")
     })
+    window.addEventListener('hashchange', function(e){
+        console.log('changed');
+    })
     var book_categories = [];
     $.get("bookCategories", function(data){
         data = JSON.parse(data);
@@ -123,7 +126,8 @@
             </div>
         </div>
         <div>
-            <button class="btn btn-primary user-buttons" >LogIn</button> or <button class="btn btn-primary user-buttons" >SignUp</button>
+            
+            <a class="btn btn-primary user-buttons" href="#?t=login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#?t=signup">SignUp</a>
         </div>
     </div>
 <!-- Modal -->

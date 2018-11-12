@@ -1,3 +1,3 @@
 - Clone this repository
 - Run setup.sh .
-- o to BookManager and run <code> FLASK_APP=__Init__.py flask run </flask>
+- go to BookManager and run <code> FLASK_APP=__Init__.py flask run </flask>
