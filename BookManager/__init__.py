@@ -4,7 +4,7 @@ import markdown
 import os
 import pandas as pd
 app = Flask(__name__)
-
+app.run()
 def initialize_project():
     folder = os.path.dirname(os.path.abspath(__file__))
     print("folder ", folder, os.listdir(folder))
