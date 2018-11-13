@@ -55,7 +55,51 @@
     .modal-header {
     background-color: darkgrey;
 }
+button#dropdownMenuButton {
+        border: none;
+        background-color: coral;
+        font-size: medium;
+    }
+    button, a.btn {
+    font-weight: bolder;
+    color: blanchedalmond;
+}
+button.btn.dropdown-toggle.btn-light {
+    background-color: bisque;
+    font-weight: bolder;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+}
 
+button.btn.btn-default {
+    background-color: bisque;
+    color: black;
+    font-weight: bolder;
+    font-size: 15px;
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-bottom: 0;
+}
+.bootstrap-select .dropdown-toggle .filter-option {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: inherit;
+    padding-right: inherit;
+    padding-bottom: inherit;
+    padding-left: inherit;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+}
+input.form-control {
+    font-size: 20px;
+}
+div#x {
+    width: 300px;
+}
 
     /* .logo {
     margin-left: 20px;
@@ -70,7 +114,7 @@
     window.addEventListener('hashchange', function(e){
         var modal = window.location.hash+'Modal';
         console.log('changed ',window.location.hash+'Modal');
-        $(".modal-body").append("<h1>Hi JP </h1>")
+        // $(".modal-body").append("<h1>Hi JP </h1>")
         $(modal).modal({
             show: true
         }); 
@@ -120,6 +164,9 @@
         </div>
         <div class="user-info p-2">
             <div class="dropdown">
+                <div>
+                    <a class="btn btn-primary user-buttons" href="#login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#signup">SignUp</a>
+                </div>
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     You &nbsp <span class="glyphicon glyphicon-user" aria-hidden="true"></span>      
                 </button>
@@ -129,9 +176,6 @@
                     <a class='dropdown-item' href='#'>Your lendings</a>
                     <a class='dropdown-item' href='#'>Queue items</a>
                     <a class='dropdown-item' href='#'>LogOut</a>
-                </div>
-                <div>
-                    <a class="btn btn-primary user-buttons" href="#?t=login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#?t=signup">SignUp</a>
                 </div>
             </div>
         </div>
