@@ -84,7 +84,7 @@
     </script>
 </head>
 <body>
-    <div class="header d-flex flex-align-center flex-row justify-content-center align-items-center fixed-top" style="height:60px; background-color:lightslategray;">
+    <div class="header d-flex flex-align-center flex-row justify-content-between align-items-center fixed-top" style="height:60px; background-color:lightslategray;">
         <div class="logo p-2">
             <img src="../static/images/logo.png" width="60px">
         </div>
@@ -111,24 +111,21 @@
         <div class="user-info p-2">
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    You<span class="glyphicon glyphicon-user" aria-hidden="true"></span>      
+                    You &nbsp <span class="glyphicon glyphicon-user" aria-hidden="true"></span>      
                 </button>
                 <div class="dropdown-menu userOptions" aria-labelledby="dropdownMenuButton">
-                            
-                        <a class='dropdown-item' href='#'>Your Account</a>
-                        <a class='dropdown-item' href='#'>Books List</a>
-                        <a class='dropdown-item' href='#'>Your lendings</a>
-                        <a class='dropdown-item' href='#'>Queue items</a>
-                        <a class='dropdown-item' href='#'>LogOut</a>
-
-                   
+                    <a class='dropdown-item' href='#'>Your Account</a>
+                    <a class='dropdown-item' href='#'>Books List</a>
+                    <a class='dropdown-item' href='#'>Your lendings</a>
+                    <a class='dropdown-item' href='#'>Queue items</a>
+                    <a class='dropdown-item' href='#'>LogOut</a>
+                </div>
+                <div>
+                    <a class="btn btn-primary user-buttons" href="#?t=login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#?t=signup">SignUp</a>
                 </div>
             </div>
         </div>
-        <div>
-            
-            <a class="btn btn-primary user-buttons" href="#?t=login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#?t=signup">SignUp</a>
-        </div>
+
     </div>
 <!-- Modal -->
 <form action="/login" method="GET">
