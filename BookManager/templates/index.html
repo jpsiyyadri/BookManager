@@ -44,6 +44,10 @@
         margin-right: 50px;
         margin-bottom: 100px;
     }
+    body{
+        background-color:ghostwhite;
+
+    }
     .card{
         margin-left: 20px;
         margin-bottom: 10px;
@@ -64,7 +68,13 @@
         console.log("clicked")
     })
     window.addEventListener('hashchange', function(e){
-        console.log('changed');
+        var modal = window.location.hash+'Modal';
+        console.log('changed ',window.location.hash+'Modal');
+        $(".modal-body").append("<h1>Hi JP </h1>")
+        $(modal).modal({
+            show: true
+        }); 
+
     })
     var book_categories = [];
     $.get("bookCategories", function(data){
@@ -83,8 +93,8 @@
     
     </script>
 </head>
-<body>
-    <div class="header d-flex flex-align-center flex-row justify-content-center align-items-center fixed-top" style="height:60px; background-color:lightslategray;">
+<body >
+    <div class="header d-flex flex-align-center flex-row justify-content-center align-items-center fixed-top" style="height:60px; background-color:rgb(46, 48, 49);">
         <div class="logo p-2">
             <img src="../static/images/logo.png" width="60px">
         </div>
@@ -120,14 +130,12 @@
                         <a class='dropdown-item' href='#'>Your lendings</a>
                         <a class='dropdown-item' href='#'>Queue items</a>
                         <a class='dropdown-item' href='#'>LogOut</a>
-
-                   
                 </div>
             </div>
         </div>
         <div>
             
-            <a class="btn btn-primary user-buttons" href="#?t=login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#?t=signup">SignUp</a>
+            <a class="btn btn-primary user-buttons" href="#login">LogIn</a> or <a class="btn btn-primary user-buttons" href="#signup">SignUp</a>
         </div>
     </div>
 <!-- Modal -->
