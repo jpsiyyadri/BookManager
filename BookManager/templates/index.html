@@ -127,7 +127,10 @@ div#x {
         book_categories.forEach(element => {
             $(".bookCategories").append("<option>"+element+"</option>")
         });
+    }).then(function(){
+        $(".bookCategories").selectpicker("refresh");
     })
+
 
     var user_options = ["Your Account", "Books List", "Your lendings", "Queue items"]
 
